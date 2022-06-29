@@ -12,9 +12,9 @@ var db *gorm.DB
 
 func init() {
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local",
-		"root",        // 用户名
-		"123456",      // 密码
-		"localhost",   // host
+		"contact",    // 用户名
+		"contact233", // 密码
+		"", // host
 		3306,          // 端口
 		"contract_db", // 数据库名
 	)
