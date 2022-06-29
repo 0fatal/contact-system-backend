@@ -6,6 +6,7 @@ import (
 	"backend/response"
 	"backend/util"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -25,7 +26,7 @@ func Login(c *gin.Context) {
 		response.Fail().Msg(err.Error()).Send(c)
 		return
 	}
-
+	c.SetSameSite(http.SameSiteNoneMode)
 	c.SetCookie("user", strconv.Itoa(int(user.ID)), 3600, "/", "", false, false)
 
 	response.Ok().Msg("登录成功").Send(c)
