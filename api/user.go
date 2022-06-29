@@ -26,7 +26,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie("user", strconv.Itoa(int(user.ID)), 3600, "/", "", false, true)
+	c.SetCookie("user", strconv.Itoa(int(user.ID)), 3600, "/", "", false, false)
 
 	response.Ok().Msg("登录成功").Send(c)
 }
