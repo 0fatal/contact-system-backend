@@ -27,7 +27,7 @@ func Login(c *gin.Context) {
 		return
 	}
 	c.SetSameSite(http.SameSiteNoneMode)
-	c.SetCookie("user", strconv.Itoa(int(user.ID)), 3600, "/", "", false, false)
+	c.SetCookie("user", strconv.Itoa(int(user.ID)), 3600, "/", "", true, false)
 
 	response.Ok().Msg("登录成功").Send(c)
 }
