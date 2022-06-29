@@ -11,11 +11,27 @@ import (
 func GetReasonList(c *gin.Context) {
 	var reasonList []*model.ApplyReason
 	var err error
-	if c.Query("type") == "refresh" {
+	if c.Query("type") == "1" {
 		reasonList, err = model.GetApplyReasonList(1)
 	} else {
 		reasonList, err = model.GetApplyReasonList(0)
 	}
+	if err != nil {
+		response.Fail().Msg(err.Error()).Send(c)
+		return
+	}
+	response.Ok().Data(reasonList).Send(c)
+}
+
+func GetAllReasonList(c *gin.Context) {
+	var reasonList []*model.ApplyReason
+	var err error
+	//if c.Query("type") == "refresh" {
+	//	reasonList, err = model.GetApplyReasonListAll(1)
+	//} else {
+	//	reasonList, err = model.GetApplyReasonListAll(0)
+	//}
+	reasonList, err = model.GetApplyReasonListAll()
 	if err != nil {
 		response.Fail().Msg(err.Error()).Send(c)
 		return

@@ -51,6 +51,7 @@ func Init() *gin.Engine {
 	reason := r.Group("reason")
 	{
 		reason.GET("/list", GetReasonList)
+		reason.GET("/list/all", GetAllReasonList)
 		reason.GET("/:id", GetReasonDetail)
 		reason.POST("/:id", EnableReason)
 	}

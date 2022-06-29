@@ -30,11 +30,13 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
+	hasTable := db.Migrator().HasTable("apply_reason")
 	// 数据库迁移
 	_ = db.AutoMigrate(&User{}, &ApplyReason{}, &RiskCustomer{}, &IdentifyApply{}, &RefreshApply{})
-	PreInsertApplyReason()
-	PreInsertUser()
+	if !hasTable {
+		PreInsertApplyReason()
+		PreInsertUser()
+	}
 }
 
 func Md5(str string) string {

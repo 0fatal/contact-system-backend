@@ -2,7 +2,7 @@ package dto
 
 type CreateIdentifyApply struct {
 	RiskReason    uint     `json:"risk_reason" binding:"required"`
-	RiskLevel     int      `json:"risk_level" binding:"required"`
+	RiskLevel     int      `json:"risk_level"`
 	ExternalLevel string   `json:"external_level" binding:"required"`
 	Remark        string   `json:"remark"`
 	Appendix      []string `json:"appendix"`

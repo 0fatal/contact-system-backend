@@ -10,7 +10,12 @@ type ApplyReason struct {
 }
 
 func GetApplyReasonList(typ int) (list []*ApplyReason, err error) {
-	err = db.Model(ApplyReason{}).Where("type = ?", typ).Find(&list).Error
+	err = db.Model(ApplyReason{}).Where("type = ? AND status = 1", typ).Find(&list).Error
+	return
+}
+
+func GetApplyReasonListAll() (list []*ApplyReason, err error) {
+	err = db.Model(ApplyReason{}).Find(&list).Error
 	return
 }
 
@@ -77,27 +82,27 @@ func PreInsertApplyReason() {
 	reasons = append(reasons, ApplyReason{
 		Reason: "正常结算后解除",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	}, ApplyReason{
 		Reason: "在其他金融机构违约解除，或外部评级显示为非违约级别",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	}, ApplyReason{
 		Reason: "计提比例小于设置界限",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	}, ApplyReason{
 		Reason: "连续 12 个月内按时支付本金和利息",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	}, ApplyReason{
 		Reason: "客户的还款意愿和还款能力明显好转，已偿付各项逾期本金、逾期利息和其他费用（包 括罚息等），且连续 12 个月内按时支付本金、利息",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	}, ApplyReason{
 		Reason: "导致违约的关联集团内其他发生违约的客户已经违约重生，解除关联成员的违约设定",
 		Status: true,
-		Type:   0,
+		Type:   1,
 	})
 	db.CreateInBatches(&reasons, len(reasons))
 }

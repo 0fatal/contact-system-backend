@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"strconv"
+	"strings"
 )
 
 // GetIdentifyApplyList
@@ -70,13 +71,13 @@ func CreateNewIdentify(c *gin.Context) {
 		return
 	}
 
-	if apply, err := model.FindLatestIdentifyApply(customer.ID); err != nil || apply.ApplyStatus == 0 {
+	if apply, err := model.FindLatestIdentifyApply(customer.ID); err == nil && apply.ApplyStatus == 0 {
 		response.Fail().Msg("客户上一条认定申请未处理，无法发起违规认定").Send(c)
 		return
 	}
 
 	apply := model.IdentifyApply{
-		Appendix:      data.Appendix,
+		Appendix:      strings.Join(data.Appendix, ", "),
 		Remark:        data.Remark,
 		RiskLevel:     data.RiskLevel,
 		ReasonId:      data.RiskReason,
