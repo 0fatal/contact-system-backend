@@ -14,7 +14,7 @@ func Init() *gin.Engine {
 
 	_r.Use(cors.New(cors.Config{
 		AllowCredentials: true,
-		AllowOrigins:     []string{"https://contractfe.onrender.com", "http://localhost:8080"},
+		AllowOrigins:     []string{"", "http://localhost:8080"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 	})) // 跨域
